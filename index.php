@@ -16,6 +16,20 @@ $moduleTitles = [
     'settings' => 'Einstellungen',
 ];
 
+$settingsSections = [
+    'grundeinstellungen' => 'Grundeinstellungen',
+    'nummernkreise' => 'Nummernkreise',
+    'zahlungsarten' => 'Zahlungsarten',
+    'laender-steuern' => 'Länder & Steuern',
+    'versand-lager' => 'Versand & Lager',
+    'einheiten-umrechnung' => 'Einheiten & Umrechnung',
+    'cross-selling' => 'Cross-Selling',
+    'eigenschaften-varianten' => 'Eigenschaften & Varianten',
+    'mieteinstellungen' => 'Mieteinstellungen',
+    'eigene-felder' => 'Eigene Felder',
+    'apps' => 'Apps',
+];
+
 $moduleFile = __DIR__ . '/modules/' . $module . '.php';
 if (!file_exists($moduleFile)) {
     $module = 'dashboard';
@@ -30,6 +44,11 @@ $navIcons = [
     'orders' => '▤',
     'settings' => '⚙',
 ];
+
+$selectedSettingsSection = $_GET['section'] ?? 'grundeinstellungen';
+if ($module !== 'settings' || !isset($settingsSections[$selectedSettingsSection])) {
+    $selectedSettingsSection = 'grundeinstellungen';
+}
 ?>
 <!doctype html>
 <html lang="de">
@@ -49,20 +68,34 @@ $navIcons = [
 
             <nav class="nav" aria-label="Hauptmenü">
                 <?php foreach ($availableModules as $navModule): ?>
-                    <a href="?module=<?= htmlspecialchars($navModule, ENT_QUOTES, 'UTF-8') ?>"
-                       class="nav-item <?= $module === $navModule ? 'active' : '' ?>">
-                        <span class="nav-icon"><?= $navIcons[$navModule] ?? '•'; ?></span>
-                        <?= htmlspecialchars($moduleTitles[$navModule], ENT_QUOTES, 'UTF-8') ?>
-                    </a>
+                    <?php if ($navModule === 'settings'): ?>
+                        <div class="nav-group <?= $module === 'settings' ? 'active-group' : '' ?>">
+                            <a href="?module=settings&section=grundeinstellungen"
+                               class="nav-item <?= $module === 'settings' ? 'active' : '' ?>">
+                                <span class="nav-icon"><?= $navIcons[$navModule] ?? '•'; ?></span>
+                                <?= htmlspecialchars($moduleTitles[$navModule], ENT_QUOTES, 'UTF-8') ?>
+                            </a>
+
+                            <?php if ($module === 'settings'): ?>
+                                <div class="subnav">
+                                    <?php foreach ($settingsSections as $sectionKey => $sectionLabel): ?>
+                                        <a href="?module=settings&section=<?= htmlspecialchars($sectionKey, ENT_QUOTES, 'UTF-8') ?>"
+                                           class="subnav-item <?= $selectedSettingsSection === $sectionKey ? 'selected' : '' ?>">
+                                            <?= htmlspecialchars($sectionLabel, ENT_QUOTES, 'UTF-8') ?>
+                                        </a>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    <?php else: ?>
+                        <a href="?module=<?= htmlspecialchars($navModule, ENT_QUOTES, 'UTF-8') ?>"
+                           class="nav-item <?= $module === $navModule ? 'active' : '' ?>">
+                            <span class="nav-icon"><?= $navIcons[$navModule] ?? '•'; ?></span>
+                            <?= htmlspecialchars($moduleTitles[$navModule], ENT_QUOTES, 'UTF-8') ?>
+                        </a>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </nav>
-
-            <div class="nav-bottom">
-                <a href="?module=settings" class="nav-item <?= $module === 'settings' ? 'active' : '' ?>">
-                    <span class="nav-icon">⚙</span>
-                    Einstellungen
-                </a>
-            </div>
         </aside>
 
         <main class="main-panel">
@@ -98,12 +131,12 @@ $navIcons = [
 
                     <div class="detail-body">
                         <div class="field-row">
-                            <label>Bezeichnung</label>
-                            <div class="value-box">SellPilot</div>
+                            <label>Bereich</label>
+                            <div class="value-box"><?= htmlspecialchars($settingsSections[$selectedSettingsSection] ?? 'Grundeinstellungen', ENT_QUOTES, 'UTF-8') ?></div>
                         </div>
                         <div class="field-row">
-                            <label>Notiz</label>
-                            <div class="value-box note-box">Kompakte WaWi-Oberfläche für die erste Produkt- und Bestandsverwaltung.</div>
+                            <label>Hinweis</label>
+                            <div class="value-box note-box">Die Einstellungen sind jetzt als Unterpunkte organisiert. Damit bleibt die Oberfläche kompakt und übersichtlich.</div>
                         </div>
                         <div class="field-row two-col">
                             <div>

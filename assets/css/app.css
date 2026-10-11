@@ -78,6 +78,12 @@ button {
   gap: 6px;
 }
 
+.nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
 .nav-item {
   display: flex;
   align-items: center;
@@ -103,6 +109,30 @@ button {
 .nav-icon {
   width: 18px;
   text-align: center;
+}
+
+.subnav {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 2px 6px 4px 20px;
+  padding-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.subnav-item {
+  display: block;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.74rem;
+  color: #dbeafe;
+  opacity: 0.8;
+}
+
+.subnav-item:hover,
+.subnav-item.selected {
+  background: rgba(148, 163, 184, 0.08);
+  opacity: 1;
 }
 
 .main-panel {
