@@ -23,6 +23,13 @@ if (!file_exists($moduleFile)) {
 }
 
 $moduleTitle = $moduleTitles[$module] ?? 'Dashboard';
+$navIcons = [
+    'dashboard' => '▦',
+    'products' => '◆',
+    'customers' => '◎',
+    'orders' => '▤',
+    'settings' => '⚙',
+];
 ?>
 <!doctype html>
 <html lang="de">
@@ -68,10 +75,10 @@ $moduleTitle = $moduleTitles[$module] ?? 'Dashboard';
                 <div class="user-box">
                     <span class="avatar">DJ</span>
                     <div class="user-meta">
-                        <strong>Daniel Jung</strong>
-                        <small>Administrator</small>
+                        <strong>Daniel</strong>
+                        <small>Admin</small>
                     </div>
-                    <button type="button" class="ghost-btn">Abmelden</button>
+                    <button type="button" class="ghost-btn">Logout</button>
                 </div>
             </header>
 
@@ -83,22 +90,20 @@ $moduleTitle = $moduleTitles[$module] ?? 'Dashboard';
                 <aside class="detail-panel">
                     <div class="detail-header">
                         <div>
-                            <span class="eyebrow">Arbeitsfenster</span>
+                            <span class="eyebrow">Detail</span>
                             <h3><?= htmlspecialchars($moduleTitle, ENT_QUOTES, 'UTF-8') ?></h3>
                         </div>
-                        <button type="button" class="primary-btn">Speichern</button>
+                        <button type="button" class="primary-btn">Save</button>
                     </div>
 
                     <div class="detail-body">
                         <div class="field-row">
                             <label>Bezeichnung</label>
-                            <div class="value-box">SellPilot – Bereich</div>
+                            <div class="value-box">SellPilot</div>
                         </div>
                         <div class="field-row">
-                            <label>Beschreibung</label>
-                            <div class="value-box note-box">
-                                Zentraler Bereich für die Steuerung der WaWi-Funktionen.
-                            </div>
+                            <label>Notiz</label>
+                            <div class="value-box note-box">Kompakte WaWi-Oberfläche für die erste Produkt- und Bestandsverwaltung.</div>
                         </div>
                         <div class="field-row two-col">
                             <div>
