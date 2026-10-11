@@ -16,14 +16,6 @@ $moduleTitles = [
     'settings' => 'Einstellungen',
 ];
 
-$navIcons = [
-    'dashboard' => '▦',
-    'products' => '◆',
-    'customers' => '◎',
-    'orders' => '▤',
-    'settings' => '⚙',
-];
-
 $moduleFile = __DIR__ . '/modules/' . $module . '.php';
 if (!file_exists($moduleFile)) {
     $module = 'dashboard';
